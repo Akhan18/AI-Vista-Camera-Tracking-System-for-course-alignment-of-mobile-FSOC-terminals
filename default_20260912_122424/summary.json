@@ -1,0 +1,21 @@
+{
+  "frames_processed": 900,
+  "simulation_duration_s": 29.966666666666665,
+  "wall_clock_duration_s": 0.4348,
+  "measured_fps": 2069.74,
+  "avg_processing_time_ms": 0.479,
+  "acquisition_time_s": 0.0,
+  "avg_tracking_error_px": 6.981,
+  "max_tracking_error_px": 200.0,
+  "rmse_tracking_error_px": 21.075,
+  "target_loss_pct": 0.0,
+  "lock_retention_pct": 100.0,
+  "num_reacquisitions": 0,
+  "avg_reacquisition_time_s": null,
+  "targets_met": {
+    "acquisition_time": true,
+    "tracking_error": true,
+    "target_loss": true,
+    "processing_fps": true
+  }
+}

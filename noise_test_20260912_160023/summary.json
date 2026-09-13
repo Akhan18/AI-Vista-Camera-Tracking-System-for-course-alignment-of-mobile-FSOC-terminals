@@ -1,0 +1,22 @@
+{
+  "frames_processed": 450,
+  "simulation_duration_s": 14.966666666666667,
+  "wall_clock_duration_s": 7.8615,
+  "measured_fps": 57.24,
+  "avg_processing_time_ms": 17.46,
+  "acquisition_time_s": null,
+  "avg_tracking_error_px": null,
+  "max_tracking_error_px": null,
+  "rmse_tracking_error_px": null,
+  "target_loss_pct": null,
+  "lock_retention_pct": 0.0,
+  "num_reacquisitions": 0,
+  "avg_reacquisition_time_s": null,
+  "target_acquired": false,
+  "targets_met": {
+    "acquisition_time": "Not measured yet (target never acquired)",
+    "tracking_error": "Not measured yet",
+    "target_loss": "Not measured yet (target never acquired)",
+    "processing_fps": true
+  }
+}
