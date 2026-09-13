@@ -1,0 +1,7 @@
+# Scenario: beacon moves in a figure-8 (lemniscate) pattern.
+meta:
+  scenario_name: "figure8"
+  description: "Beacon moves in a figure-8 pattern, testing direction reversals"
+
+motion:
+  type: "figure8"

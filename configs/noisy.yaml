@@ -1,0 +1,17 @@
+# Scenario: same straight-line motion as default, but with sensor noise
+# enabled. Used later (Phase 12/13) to measure detector robustness.
+meta:
+  scenario_name: "noisy"
+  description: "Straight-line beacon motion with Gaussian + salt-and-pepper noise"
+
+motion:
+  type: "straight_line"
+
+disturbances:
+  gaussian_noise:
+    enabled: true
+    mean: 0
+    stddev: 15
+  salt_and_pepper_noise:
+    enabled: true
+    amount: 0.02

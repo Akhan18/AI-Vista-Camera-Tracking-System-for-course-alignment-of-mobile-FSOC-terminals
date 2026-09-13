@@ -1,0 +1,9 @@
+# Scenario: beacon moves in a straight line across the world.
+# This mirrors default.yaml's motion settings but is kept as its own file
+# so scenarios can be selected by name (e.g. --scenario straight_line).
+meta:
+  scenario_name: "straight_line"
+  description: "Beacon moves in a straight line from start_xy to end_xy"
+
+motion:
+  type: "straight_line"

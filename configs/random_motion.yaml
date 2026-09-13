@@ -1,0 +1,8 @@
+# Scenario: beacon moves via random walk. Useful for stress-testing the
+# tracker's ability to handle unpredictable motion (no smooth trajectory).
+meta:
+  scenario_name: "random_motion"
+  description: "Beacon follows a random walk within the world bounds"
+
+motion:
+  type: "random"

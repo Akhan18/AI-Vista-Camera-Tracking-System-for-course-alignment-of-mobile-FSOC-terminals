@@ -1,0 +1,9 @@
+meta:
+  scenario_name: "target_loss"
+  description: "Temporary beacon visibility loss followed by reacquisition"
+
+disturbances:
+  target_occlusion:
+    enabled: true
+    start_s: 8.0
+    duration_s: 3.0

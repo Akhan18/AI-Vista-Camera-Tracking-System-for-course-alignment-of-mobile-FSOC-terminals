@@ -1,0 +1,9 @@
+meta:
+  scenario_name: "noise_test"
+  description: "Gaussian sensor noise stress test"
+
+disturbances:
+  gaussian_noise:
+    enabled: true
+    mean: 0
+    stddev: 15

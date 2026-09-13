@@ -1,0 +1,21 @@
+meta:
+  scenario_name: "stress_test"
+  description: "Combined Gaussian noise, low light, haze, and camera jitter"
+
+disturbances:
+  gaussian_noise:
+    enabled: true
+    mean: 0
+    stddev: 15
+
+  low_light:
+    enabled: true
+    brightness_factor: 0.3
+
+  haze:
+    enabled: true
+    intensity: 0.4
+
+  camera_jitter:
+    enabled: true
+    max_pixels_per_frame: 5

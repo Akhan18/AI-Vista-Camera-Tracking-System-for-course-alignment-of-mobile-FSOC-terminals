@@ -1,0 +1,13 @@
+# Scenario: reduced ambient brightness, simulating dusk/dawn or overcast
+# operating conditions for the FSOC terminal.
+meta:
+  scenario_name: "low_light"
+  description: "Straight-line beacon motion under reduced illumination"
+
+motion:
+  type: "straight_line"
+
+disturbances:
+  low_light:
+    enabled: true
+    brightness_factor: 0.3

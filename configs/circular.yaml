@@ -1,0 +1,18 @@
+# Scenario: beacon moves in a circular path. All other parameters inherit
+# from default.yaml via merge_configs() in the application entry point.
+meta:
+  scenario_name: "circular"
+  description: "Beacon moves in a circular path at constant angular speed"
+
+motion:
+  type: "circular"
+  circular:
+    center_xy: [1000, 1000]
+    # radius kept within the camera's viewport half-extents (320 x, 240 y)
+    # so the beacon stays reachable by pure reactive tracking. The system
+    # does not yet perform active search when the target starts outside
+    # the FOV (see DEVELOPMENT_PLAN.md "Known limitations") -- coarse
+    # alignment here assumes the terminal is already roughly pointed at
+    # the target, which this radius reflects.
+    radius_px: 200
+    angular_speed_deg_per_s: 20

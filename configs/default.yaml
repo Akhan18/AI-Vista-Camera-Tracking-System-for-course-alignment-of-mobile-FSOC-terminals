@@ -1,0 +1,142 @@
+# =============================================================================
+# AI-VISTA — Default Configuration
+# SIH26169: AI-Based Virtual Camera Tracking System for Coarse Alignment
+#           of Mobile FSOC Terminals
+# =============================================================================
+# This file is the single source of truth for every tunable parameter in the
+# system. Nothing in the codebase should hard-code a number that appears here.
+# Other scenario files (e.g. circular.yaml, noisy.yaml) will only override the
+# specific sections they need to change.
+# =============================================================================
+
+meta:
+  scenario_name: "default"
+  description: "Baseline scenario: single beacon, straight-line motion, no disturbances"
+
+# -----------------------------------------------------------------------------
+# The virtual world the beacon moves around in. Think of this as a large
+# 2D "sky" that the camera can only ever see a small window (FOV) of.
+# -----------------------------------------------------------------------------
+world:
+  width_px: 2000
+  height_px: 2000
+
+# -----------------------------------------------------------------------------
+# The virtual camera: what it can actually see (resolution + field of view)
+# and how fast it is allowed to move to chase the beacon.
+# -----------------------------------------------------------------------------
+camera:
+  initial_center_xy: [400, 1000]
+  resolution:
+    width_px: 640
+    height_px: 480
+  field_of_view_deg:
+    horizontal: 4.0
+    vertical: 3.0
+  update_rate_hz: 30
+  max_angular_speed_deg_per_s: 5.0
+  update_interval_s: 0.0333   # ~30 Hz, derived but kept explicit for clarity
+
+# -----------------------------------------------------------------------------
+# The beacon (target) being tracked.
+# -----------------------------------------------------------------------------
+beacon:
+  count: 1
+  shape: "square"
+  size_px:
+    width: 10
+    height: 10
+  color_bgr: [255, 255, 255]   # bright spot on a dark background
+
+# -----------------------------------------------------------------------------
+# How the beacon moves through the world. "type" selects one of the motion
+# generators implemented in src/simulation/motion.py
+# -----------------------------------------------------------------------------
+motion:
+  type: "straight_line"        # straight_line | circular | figure8 | random | spiral | sinusoidal
+  speed_px_per_s: 100
+  straight_line:
+    # end_xy is deliberately kept within [320, 1680] on this axis: with a
+    # 640px-wide camera viewport, the camera's centre can only range over
+    # [half_width, world_width - half_width] = [320, 1680] and still show a
+    # full viewport. A target beyond that leaves a permanent residual error
+    # even with perfect tracking -- a real geometric FOV limit, not a
+    # control-loop bug (we found this by testing, see DEVELOPMENT_PLAN.md).
+    start_xy: [200, 1000]
+    end_xy: [1600, 1000]
+  circular:
+    center_xy: [1000, 1000]
+    radius_px: 600
+    angular_speed_deg_per_s: 20
+  figure8:
+    center_xy: [1000, 1000]
+    width_px: 700
+    height_px: 400
+    angular_speed_deg_per_s: 15
+  random:
+    step_size_px: 15
+    seed: 42
+
+# -----------------------------------------------------------------------------
+# Disturbances / degradations applied to the rendered frame before it reaches
+# the detector. All disabled by default in the baseline scenario.
+# -----------------------------------------------------------------------------
+disturbances:
+  gaussian_noise:
+    enabled: false
+    mean: 0
+    stddev: 15
+  salt_and_pepper_noise:
+    enabled: false
+    amount: 0.02
+  poisson_noise:
+    enabled: false
+  low_light:
+    enabled: false
+    brightness_factor: 0.3
+  haze:
+    enabled: false
+    intensity: 0.4
+  fog:
+    enabled: false
+    intensity: 0.4
+  rain:
+    enabled: false
+    density: 0.02
+  camera_jitter:
+    enabled: false
+    max_pixels_per_frame: 20
+  platform_motion:
+    enabled: false
+    amplitude_px: 5
+    frequency_hz: 1.0
+  target_occlusion:
+    enabled: false
+    start_s: 8.0
+    duration_s: 3.0  
+
+# -----------------------------------------------------------------------------
+# Performance targets we are designing towards (from the SIH problem
+# statement). These are GOALS for the evaluation subsystem to check against —
+# they are never written into results directly.
+# -----------------------------------------------------------------------------
+performance_targets:
+  acquisition_time_s_max: 2.0
+  tracking_error_px_max: 10
+  target_loss_pct_max: 5
+  reacquisition_time_s_max: 1.0
+  processing_fps_min: 20
+
+# -----------------------------------------------------------------------------
+# Simulation run settings
+# -----------------------------------------------------------------------------
+simulation:
+  duration_s: 30
+  random_seed: 42
+
+# -----------------------------------------------------------------------------
+# Output / logging paths
+# -----------------------------------------------------------------------------
+paths:
+  output_dir: "data/output"
+  log_dir: "logs"
